@@ -1,0 +1,63 @@
+#Exercise 2 
+#my name anonymized for GitHub
+use name_exercise02;
+
+#Question 1
+Select MG_NUMBER, MG_NAME
+	From MANAGER
+		Where MG_NUMBER like '%0%'
+			Order by MG_NAME DESC;
+            
+#Question 2
+SELECT P_MANAGER
+	FROM PROJECT
+		WHERE ACTUAL_COST>EXPECTED_COST;
+        
+#Question 3
+#see name_exercise2.mwb 
+
+#Question 4
+SELECT MG_NAME, MG_NUMBER
+	FROM MANAGER
+		WHERE MG_DEPARTMENT LIKE '%Finance%'
+			ORDER BY MG_NAME DESC;
+
+#Question 5
+SELECT P_NAME, EXPECTED_COST 
+	FROM PROJECT
+		WHERE EXPECTED_COST>(SELECT AVG(EXPECTED_COST) FROM PROJECT);
+
+#Question 6
+Select AVG (EXPECTED_COST) 
+	From PROJECT JOIN MANAGER 
+			ON MG_NUMBER = P_MANAGER
+				WHERE MG_NAME = 'Yates'; 
+                
+#Question 7
+SELECT SUM(ACTUAL_COST)
+	FROM PROJECT JOIN MANAGER
+		ON P_MANAGER = MG_NUMBER
+			WHERE MG_NAME = 'Kanter'
+				AND ACTUAL_COST <= EXPECTED_COST;
+                
+#Question 8
+SELECT P_NUMBER, P_NAME
+	From PROJECT
+		Where ACTUAL_COST >= EXPECTED_COST*1.25;
+        
+#Question 9
+Select MG_NAME, SUM(EXPECTED_COST)
+	From PROJECT JOIN MANAGER
+		ON P_MANAGER = MG_NUMBER
+			GROUP BY MG_NAME 
+				HAVING SUM(EXPECTED_COST)>5000
+					ORDER BY MG_NAME;
+
+#Question 10
+select MANAGER.*, P_NAME
+	From MANAGER
+		LEFT JOIN PROJECT 
+			ON P_MANAGER=MG_NUMBER;
+
+
+
